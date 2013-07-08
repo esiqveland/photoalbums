@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}My albums{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+    {% if album_images %}
+        {% for album, images in album_images %}
+            <div class="span4 album_listing">
+                 <p>
+                     <a href="/albums/{{ album.id }}/"><img id="album_{{ album.id }}" src="{{ images.0.image.url }}" class="img-rounded imageClip" ></a>
+                 </p>
+                    <p><a href="/albums/{{ album.id }}/"><h2>{{ album.name }}</h2></a></p>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row">
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>No albums uploaded yet!</p>
+    {% endif %}
+    </div>
+
+{% endblock %}
+{% block custom_scripting %}
+    <script language="JavaScript" >
+    run_iskip = function () {
+    {% for album, images in album_images %}
+        img_array_{{ album.id }} = [
+            {% for img in images %}
+                '{{ img.image.url}}'{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ];
+        console.debug('iskip album: {{ album.id }}')
+        $("#album_{{ album.id }}").iskip(
+                {
+                    images:img_array_{{ album.id }},
+                    method:'mousemove',
+                    cycle:1
+                }
+        );
+    {% endfor %}
+    };
+    run = function() {
+        run_iskip();
+    };
+    run();
+    </script>
+{% endblock %}

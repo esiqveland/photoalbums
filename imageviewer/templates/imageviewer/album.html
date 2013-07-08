@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if album and album_images %}
+        {{ album.name }}
+    {% else %}
+        404
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if album_images and album %}
+            <div class="album">
+            {% for image in album_images %}
+                <img src="{{ image.image.url }}" class="img-rounded imageClip album_image">
+            {% endfor %}
+            </div>
+    {% else %}
+            <p>No images in this album!</p>
+    {% endif %}
+{% endblock %}

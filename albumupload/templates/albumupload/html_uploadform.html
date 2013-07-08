@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Upload albums{% endblock %}
+{% block content %}
+    <div id="uploadDiv" class="upload">
+        <form name="uploadForm" action="upload" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <input name="album_name" type="text" placeholder="Album name" >
+            <input name="myfiles" type="file" multiple >
+            <input type="submit" >
+        </form>
+    </div>
+{% endblock %}
+

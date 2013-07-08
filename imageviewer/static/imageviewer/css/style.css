@@ -1,0 +1,10 @@
+body {
+    padding-top: 4.0em;
+    padding-bottom: 3.0em;
+}
+
+.imageClip {
+    width:  370px;
+    height: 278px;
+    overflow:   hidden;
+}
