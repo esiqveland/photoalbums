@@ -1,5 +1,5 @@
 import hashlib
-import Image
+from PIL import Image
 from photostore.settings import MEDIA_ROOT
 from cStringIO import StringIO
 
