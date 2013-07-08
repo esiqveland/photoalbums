@@ -1,12 +1,13 @@
 import os
 # Django settings for photostore project.
+baseDir = os.getcwd()
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     ('Eivind Larsen', 'to.eivind@gmail.com'),
-    # ('Your Name', 'your_email@example.com'),
+    ('Nicklas Utgaard', 'nutgaard@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -14,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Users/eivind/src/photostore/photostore.sqlite3', # Or path to database file if using sqlite3.
+        'NAME': baseDir+'/photoalbums.sqlite3', # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -52,7 +53,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = '/Users/eivind/src/photostore/files/upload/'
+MEDIA_ROOT = baseDir+'/files/upload/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -63,13 +64,13 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/Users/eivind/src/photostore/files/static/'
+STATIC_ROOT = baseDir+'/files/static/'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
-PROJECT_PATH = '/Users/eivind/src/photostore/files/'
+PROJECT_PATH = baseDir+'/files/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -112,7 +113,7 @@ ROOT_URLCONF = 'photostore.urls'
 WSGI_APPLICATION = 'photostore.wsgi.application'
 
 TEMPLATE_DIRS = (
-    "/Users/eivind/src/photostore/photostore/templates"
+    baseDir+"/photostore/templates"
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
