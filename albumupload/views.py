@@ -19,9 +19,9 @@ def handle_uploaded_file(postdata, file_uploaded):
     path = MEDIA_ROOT + "photos/" + hash + "." + image.format.lower()
     filename = hash+"."+image.format.lower()
     thumbnail_image = image.thumbnail(max_size, Image.ANTIALIAS)
-    with open(hash+"_thumb."+image.format.lower(), 'wb+') as destination:
+    thumbnail_image_path = MEDIA_ROOT + "photos/"+hash+"_thumb."+image.format.lower()
+    with open(thumbnail_image_path, 'wb+') as destination:
         destination.write(image.tostring())
-
     print path
     album, album_was_created = Album_Store.objects.get_or_create(name=postdata['album_name'])
     imagemodel, image_was_created = Image_Store.objects.get_or_create(digest=filename, album=album)
@@ -35,8 +35,9 @@ def upload(request):
         print "POST"
         for myfile in request.FILES.getlist('myfiles'):
             form = UploadFileForm(request.POST, request.FILES)
-            print myfile
+            print request.FILES['myfiles']
             print "form?"
+            print myfile
             if form.is_valid():
                 print "Form is valid!"
                 handle_uploaded_file(request.POST, myfile)
