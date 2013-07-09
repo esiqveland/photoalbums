@@ -6,3 +6,4 @@ local_settings.py
 .idea
 *.sqlite3
 *.iml
+files/upload/
