@@ -39,9 +39,7 @@ jQuery.fn.iskip = function(options) {
 
 		for(var x=1; x<=options.cycle; x++) {
 			for(var y=0; y<options.images.length; y++) {
-                var temp = options.images[y].split(".");
-
-				imgArr.push(temp[0]+"_thumb."+temp[1]);
+				imgArr.push(options.images[y]);
 			}
 		}
 

@@ -11,8 +11,6 @@ def index(request):
         list_images = get_list_or_404(Image_Store,  album=album.id)
         if list_images:
             headline = (album, list_images)
-            print list_images[0].image.url
-            print headline
             album_images.append(headline)
     return render(request, 'imageviewer/index.html', {'last_albums': last_albums, 'album_images': album_images})
 

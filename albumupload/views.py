@@ -9,7 +9,6 @@ from albumupload.photohasher import hash_photo
 from django.template import RequestContext
 from PIL import Image
 
-max_size = (370, 278)
 def index(request):
     return render(request, 'albumupload/index.html')
 
@@ -21,17 +20,10 @@ def handle_uploaded_file(postdata, file_uploaded):
     filename = hash+"."+image.format.lower()
     print path
     album, album_was_created = Album_Store.objects.get_or_create(name=postdata['album_name'])
-    imagemodel, image_was_created = Image_Store.objects.get_or_create(digest=filename, album=album)
+    imagemodel, image_was_created = Image_Store.objects.get_or_create(digest=hash, album=album)
     if image_was_created:
         imagemodel.image.save(filename, file_uploaded)
     imagemodel.save()
-    image.thumbnail(max_size, Image.ANTIALIAS)
-    output = StringIO()
-    image.save(output, image.format.upper())
-    output.seek(0)
-    thumbnail_image_path = MEDIA_ROOT + "photos/"+hash+"_thumb."+image.format.lower()
-    with open(thumbnail_image_path, 'wb+') as destination:
-        destination.write(output.read())
 
 
 def upload(request):
@@ -41,7 +33,7 @@ def upload(request):
             form = UploadFileForm(request.POST, request.FILES)
             print request.FILES['myfiles']
             print "form?"
-            print myfile
+            print myfile.content_type
             if form.is_valid():
                 print "Form is valid!"
                 handle_uploaded_file(request.POST, myfile)

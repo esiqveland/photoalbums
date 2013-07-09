@@ -12,7 +12,7 @@
     {% if album_images and album %}
             <div class="album">
             {% for image in album_images %}
-                <img src="{{ image.image.url }}" class="img-rounded imageClip album_image">
+                <img src="{{ image.thumbnail.url }}" class="img-rounded imageClip album_image">
             {% endfor %}
             </div>
     {% else %}
